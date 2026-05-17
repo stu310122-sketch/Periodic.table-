@@ -111,7 +111,10 @@ export function QuizView({ elements, onBack }: QuizViewProps) {
         }
         
         setQuizState(prev => ({ ...prev, currentQ: { ...prev.currentQ, answered: selectedOpt, correct: isCorrect } }));
-        setTimeout(() => { nextQuestion(quizState.score + (isCorrect ? 10 : 0), quizState.qIndex + 1, quizState.totalQ); }, 1500);
+        setTimeout(() => { 
+            const scoreToAdd = isCorrect ? (100 / quizState.totalQ) : 0;
+            nextQuestion(quizState.score + scoreToAdd, quizState.qIndex + 1, quizState.totalQ); 
+        }, 1500);
     };
 
     return (
@@ -230,7 +233,7 @@ export function QuizView({ elements, onBack }: QuizViewProps) {
                 {quizState.step === 'end' && (
                     <div className="p-10 text-center" aria-live="polite">
                         <div className="text-7xl mb-4 filter drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]" aria-hidden="true">
-                            {quizState.score >= quizState.totalQ * 8 ? '🏆' : quizState.score >= quizState.totalQ * 5 ? '👍' : '📚'}
+                            {quizState.score >= 80 ? '🏆' : quizState.score >= 50 ? '👍' : '📚'}
                         </div>
                         <h2 className="text-4xl font-black text-white mb-2 tracking-widest glowing-text uppercase">測驗結束！</h2>
                         <p className="text-[#a5f3fc] mb-2 font-mono text-sm uppercase">總得分</p>

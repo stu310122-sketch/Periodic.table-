@@ -518,18 +518,39 @@ export const TableView: React.FC<TableViewProps> = ({
                 </div>
             </div>
 
-            {/* Category Legend for Basic View */}
-            {tableMode === 'basic' && (
-                <div aria-hidden="true" className="absolute right-4 bottom-24 z-40 hidden lg:flex flex-col gap-1 bg-black/60 backdrop-blur-md p-3 rounded-xl border border-white/20 shadow-lg max-h-[300px] overflow-y-auto custom-scrollbar">
-                    <h4 className="text-[10px] text-white/70 font-bold mb-1 uppercase tracking-widest">分類圖例</h4>
-                    {Object.entries(CATEGORIES).map(([key, cat]) => (
-                        <div key={key} className="flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full border border-white/20" style={{ backgroundColor: cat.hex }}></div>
-                            <span className="text-xs text-white/90 font-mono">{cat.label}</span>
-                        </div>
-                    ))}
-                </div>
-            )}
+            {/* Category Legend */}
+            <div aria-hidden="true" className="absolute right-2 bottom-24 sm:right-4 z-40 flex flex-col gap-1 bg-black/60 backdrop-blur-md p-2 sm:p-3 rounded-xl border border-white/20 shadow-lg max-h-[250px] sm:max-h-[300px] overflow-y-auto custom-scrollbar pointer-events-auto">
+                <h4 className="text-[10px] text-white/70 font-bold mb-1 uppercase tracking-widest">
+                    {tableMode === 'basic' ? '分類圖例' : tableMode === 'config' ? '軌域圖例' : '狀態圖例'}
+                </h4>
+                {tableMode === 'basic' && Object.entries(CATEGORIES).map(([key, cat]) => (
+                    <div key={key} className="flex items-center gap-1.5 sm:gap-2">
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border border-white/20 shrink-0" style={{ backgroundColor: cat.hex }}></div>
+                        <span className="text-[10px] sm:text-xs text-white/90 font-mono whitespace-nowrap">{cat.label}</span>
+                    </div>
+                ))}
+                {tableMode === 'config' && [
+                    { label: 's 區', hex: '#ff1a53' },
+                    { label: 'p 區', hex: '#ff8c00' },
+                    { label: 'd 區', hex: '#00d4ff' },
+                    { label: 'f 區', hex: '#00ff2a' },
+                ].map(item => (
+                    <div key={item.label} className="flex items-center gap-1.5 sm:gap-2">
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border border-white/20 shrink-0" style={{ backgroundColor: item.hex }}></div>
+                        <span className="text-[10px] sm:text-xs text-white/90 font-mono whitespace-nowrap">{item.label}</span>
+                    </div>
+                ))}
+                {tableMode === 'phase' && [
+                    { label: '固體 (Solid)', hex: '#d6d3d1' },
+                    { label: '液體 (Liquid)', hex: '#60a5fa' },
+                    { label: '氣體 (Gas)', hex: '#4ade80' },
+                ].map(item => (
+                    <div key={item.label} className="flex items-center gap-1.5 sm:gap-2">
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border border-white/20 shrink-0" style={{ backgroundColor: item.hex }}></div>
+                        <span className="text-[10px] sm:text-xs text-white/90 font-mono whitespace-nowrap">{item.label}</span>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

@@ -59,7 +59,7 @@ export const elementRawData = [
     [112,"Cn","鎶",285,"transition","d",0,"[Rn] 5f¹⁴ 6d¹⁰ 7s²"], [113,"Nh","鉨",284,"post-transition","p",0,"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p¹"],
     [114,"Fl","鈇",289,"post-transition","p",0,"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²"], [115,"Mc","鏌",288,"post-transition","p",0,"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³"],
     [116,"Lv","鉝",293,"post-transition","p",0,"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁴"], [117,"Ts","鿬",294,"halogen","p",0,"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵"],
-    [118,"Og","奧",294,"noble-gas","p",2,"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶"],
+    [118,"Og","鿫",294,"noble-gas","p",2,"[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁶"],
 ];
 
 export interface ElementData {
