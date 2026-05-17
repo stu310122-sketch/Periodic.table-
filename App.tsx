@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { getElements, ElementData } from './src/data';
 import { OrbitalModal } from './src/components/OrbitalModal';
@@ -23,6 +23,37 @@ export default function App() {
     const [phaseFilter, setPhaseFilter] = useState<string | number>('all'); 
 
     const elements = React.useMemo(() => getElements(), []);
+
+    useEffect(() => {
+        // Prevent right click
+        const handleContextMenu = (e: MouseEvent) => {
+            e.preventDefault();
+        };
+
+        // Prevent keyboard shortcuts for dev tools
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Ctrl/Cmd + Shift + I/J/C
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) {
+                e.preventDefault();
+            }
+            // Ctrl/Cmd + U
+            if ((e.ctrlKey || e.metaKey) && ['U', 'u'].includes(e.key)) {
+                e.preventDefault();
+            }
+        };
+
+        document.addEventListener('contextmenu', handleContextMenu);
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('contextmenu', handleContextMenu);
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     const backToHome = () => navigate('/');
 
